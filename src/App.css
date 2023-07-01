@@ -11,7 +11,7 @@
   --photo: #73bda4;
   --video: #597ab8;
   --location: #ef576b;
---shedule: #E1AE4A;
+  --schedule: #E1AE4A;
 }
 
 .App{
@@ -37,6 +37,7 @@
   border-radius: 0.5rem;
   background: var(--buttonBg);
   transition: all 100ms ease-out;
+  border: 2px solid var(--orange);
 }
 .button:hover{
   cursor: pointer;
