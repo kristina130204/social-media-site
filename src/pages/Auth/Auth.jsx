@@ -39,7 +39,7 @@ function SignUp(){
     return(
         <div className="a-right">
             <form className='infoForm authForm'>
-                <h3>Sigh Up</h3>
+                <h3>Sign Up</h3>
                 <div>
                     <input type="text" placeholder='First name' className='infoInput' name='firstName' />
                     <input type="text" placeholder='Last name' className='infoInput' name='lastName' />
