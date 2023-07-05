@@ -13,14 +13,16 @@
     border: none;
     outline: none;
 }
+.fa-twitter{
+    font-size: 32px;
+}
 .s-icon{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(106.23deg, #ec9973, #c45a53 100%);
+    color: var(--orange);
     border-radius: 5px;
     padding: 4px;
-    color: #fff;
 }
 .s-icon:hover{
     cursor: pointer;
