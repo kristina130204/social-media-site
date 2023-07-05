@@ -1,12 +1,10 @@
 import React from 'react'
 import './Auth.css'
-import Logo from '../../img/logo.png'
 
 const Auth = () => {
   return (
     <div className='Auth'>
       <div className="a-left">
-        <img src={Logo} alt="" />
         <div className="Webname">
             <h1>Social app</h1>
             <h6>Explore the ideas throughout the word</h6>
@@ -39,7 +37,7 @@ function SignUp(){
     return(
         <div className="a-right">
             <form className='infoForm authForm'>
-                <h3>Sigh Up</h3>
+                <h3>Sign Up</h3>
                 <div>
                     <input type="text" placeholder='First name' className='infoInput' name='firstName' />
                     <input type="text" placeholder='Last name' className='infoInput' name='lastName' />
