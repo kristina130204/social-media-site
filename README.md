@@ -1,3 +1,5 @@
 -- MERN social media app -- 
 
-Thanks ZAINKEEPSCODE on Youtube for the tutorial!
+(on dev process)
+
+Thanks ZAINKEEPSCODE on Youtube for the inspiration!
