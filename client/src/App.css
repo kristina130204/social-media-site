@@ -38,12 +38,12 @@
   border: none;
   border-radius: 0.5rem;
   background: var(--buttonBg);
-  transition: all 100ms ease-out;
+  transition: all .5s ease-out;
   border: 2px solid var(--orange);
 }
 .button:hover{
   cursor: pointer;
   color: var(--orange);
-  background: transparent;
+  background: #fff;
   border: 2px solid var(--orange);
 }
