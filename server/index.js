@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
+import AuthRoute from "./Routes/AuthRoute.js";
+
 const app = express();
 
 dotenv.config();
@@ -17,4 +19,7 @@ app.use(cors());
 
 mongoose.connect(dbPath, 
     {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => app.listen(PORT, () => console.log(`Listening ${PORT}`)));
+    .then(() => app.listen(PORT, () => console.log(`Listening at port ${PORT}`)))
+    .catch((error) => console.log(error));
+
+app.use('/auth', AuthRoute);
