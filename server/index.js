@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import AuthRoute from "./Routes/AuthRoute.js";
 import UserRoute from "./Routes/UserRoute.js"
 import PostRoute from "./Routes/PostRoute.js";
+import CommentRoute from "./Routes/CommentRoute.js";
 
 const app = express();
 
@@ -27,3 +28,4 @@ mongoose.connect(dbPath,
 app.use('/auth', AuthRoute);
 app.use('/user', UserRoute);
 app.use('/post', PostRoute);
+app.use('/comment', CommentRoute);
