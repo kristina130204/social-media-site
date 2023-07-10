@@ -1,7 +1,33 @@
-import React from 'react'
-import './Auth.css'
+import React, { useState } from 'react';
+import './Auth.css';
+import { useDispatch, useSelector } from "react-redux";
+import { logIn, signUp } from '../../actions/AuthAction';
 
 const Auth = () => {
+    const [isSignUp, setSignUp] = useState(true);
+    const dispatch = useDispatch();
+    const loading = useSelector((state) => state.authReducer.loading);
+    const [data, setData] = useState({firstName: "", lastName: "", username: "", password: "", confirmPassword: ""});
+    const [confirmPass, setConfirmPass] = useState(true);
+
+    const handleChange = (e) => {
+        setData({...data, [e.target.name]: e.target.value});
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(isSignUp){
+            data.password === data.confirmPassword ? dispatch(signUp(data)) :  setConfirmPass(false);
+        } else{
+            dispatch(logIn(data));
+        }
+    }
+
+    const resetForm = () => {
+        setConfirmPass(true);
+        setData({firstName: "", lastName: "", username: "", password: "", confirmPassword: ""});
+    }
+
   return (
     <div className='Auth'>
       <div className="a-left">
@@ -10,50 +36,31 @@ const Auth = () => {
             <h6>Explore the ideas throughout the word</h6>
         </div>
       </div>
-      <SignUp/>
-      {/* <LogIn/> */}
+      <div className="a-right">
+            <form className='infoForm authForm' onSubmit={handleSubmit}>
+                <h3>{ isSignUp ? "Sign Up" : "Log In" }</h3>
+                    { isSignUp && 
+                    <div>
+                        <input type="text" placeholder='First name' className='infoInput' name='firstName' value={data.firstName} onChange={handleChange} />
+                        <input type="text" placeholder='Last name' className='infoInput' name='lastName' value={data.lastName} onChange={handleChange} />
+                    </div>
+                    }
+                <div><input type="text" placeholder='Username' className='infoInput' name='username' value={data.username} onChange={handleChange} /></div>
+                <div>
+                    <input type="password" placeholder='Password' className='infoInput' name='password' value={data.password} onChange={handleChange} />
+                    { isSignUp && 
+                    <input type="password" placeholder='Confirm password' className='infoInput' name='confirmPassword' value={data.confirmPassword} onChange={handleChange} />
+                    }
+                </div>
+                { confirmPass ? "" : <span style={{color: "red", fontSize: "14px"}}>* Confirm password and password are not the same.</span> }
+                <div>
+                    <span style={{fontSize:'12px', cursor:'pointer'}} onClick={() => {setSignUp(!isSignUp); resetForm()}} >{ isSignUp ? "Already have an account? Login" : "Don't have an account? Sign Up" }</span>
+                </div>
+                <button type='submit' className="info-button button" disabled={ loading }>{ loading ? "Loading..." : isSignUp ? "Sign Up" : "Log In" }</button>
+            </form>
+        </div>
     </div>
   )
-}
-
-function LogIn(){
-    return(
-        <div className="a-right">
-            <form className='infoForm authForm'>
-                <h3>Log In</h3>
-                <div><input type="text" placeholder='Username' className='infoInput' name='username' /></div>
-                <div>
-                    <input type="password" placeholder='Password' className='infoInput' name='password' />
-                </div>
-                <div>
-                    <span style={{fontSize:'12px'}}>Don't have an account? Sign Up</span><button type='submit' className="info-button button">Log In</button>
-                </div>
-            </form>
-        </div>
-    )
-}
-
-function SignUp(){
-    return(
-        <div className="a-right">
-            <form className='infoForm authForm'>
-                <h3>Sign Up</h3>
-                <div>
-                    <input type="text" placeholder='First name' className='infoInput' name='firstName' />
-                    <input type="text" placeholder='Last name' className='infoInput' name='lastName' />
-                </div>
-                <div><input type="text" placeholder='Username' className='infoInput' name='username' /></div>
-                <div>
-                    <input type="password" placeholder='Password' className='infoInput' name='password' />
-                    <input type="password" placeholder='Confirm password' className='infoInput' name='confirmPassword' />
-                </div>
-                <div>
-                    <span style={{fontSize:'12px'}}>Already have an account? Login</span>
-                </div>
-                <button type='submit' className="info-button button">Sign Up</button>
-            </form>
-        </div>
-    )
 }
 
 export default Auth

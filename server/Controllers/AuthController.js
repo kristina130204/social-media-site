@@ -2,12 +2,16 @@ import UserModel from "../Models/userModel.js";
 import bcrypt from 'bcrypt';
 
 export const register = async(req, res) => {
-    const {username, password, firstName, lastName} = req.body;
     const salt = await bcrypt.genSalt(10);
-    const hashedPass = await bcrypt.hash(password, salt);
-    const newUser = new UserModel({username, password:hashedPass, firstName, lastName});
-
+    const hashedPass = await bcrypt.hash(req.body.password, salt);
+    req.body.password = hashedPass;
+    const newUser = new UserModel(req.body);
+    const {username} = req.body
     try {
+        const oldUser = await UserModel.findOne({username});
+        if(oldUser){
+            return res.status(400).json("This username has already taken.");
+        }
         await newUser.save();
         res.status(200).json(newUser);
     } catch (error) {
