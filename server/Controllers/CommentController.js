@@ -17,7 +17,7 @@ export const getComments = async (req, res) => {
     const postId = req.params.id;
     try {
         const currentPostComments = await CommentModel.find({postId : postId});
-        res.status(200).json(currentPostComments);
+        res.status(200).json(currentPostComments.sort((a, b) => {return b.createdAt - a.createdAt}));
     } catch (error) {
         res.status(500).json(error);
     }

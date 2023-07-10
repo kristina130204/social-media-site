@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Post.css'
 import Comment from '../../img/comment.png'
 import Share from '../../img/share.png'
 import Heart from '../../img/like.png'
 import NotLike from '../../img/notlike.png'
+import CommentsModal from '../commentsModal/commentsModal'
 
 const Post = ({ data }) => {
+  const [modalOpened, setModalOpened] = useState(false);
   return (
     <div className='Post'>
       <img src={ data.img } alt="" />
       <div className="postReact">
         <img src={ data.liked ? Heart : NotLike } alt="" />
-        <img src={ Comment } alt="" />
+        <img src={ Comment } alt="" onClick={() => setModalOpened(true)} />
+        <CommentsModal modalOpened={modalOpened} setModalOpened={setModalOpened} />
         <img src={ Share } alt="" />
       </div>
       <span style={{color: 'var(--gray)', fontSize: '12px'}}>{ data.likes } likes</span>
